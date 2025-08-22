@@ -104,6 +104,25 @@ EOF
                 """
             }
         }
+        stage('Deploy Nginx Config') {
+            steps {
+                script {
+                    // nginx 설정 파일 백업
+                    sh 'sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup.$(date +%Y%m%d_%H%M%S)'
+                    
+                    // 새 설정 파일 복사
+                    sh 'sudo cp nginx/nginx.conf /etc/nginx/sites-available/default'
+                    
+                    // nginx 설정 문법 확인
+                    sh 'sudo nginx -t'
+                    
+                    // nginx 재로드
+                    sh 'sudo systemctl reload nginx'
+                    
+                    echo 'Nginx configuration updated successfully'
+                }
+            }
+        }
     }
     post {
         success {
