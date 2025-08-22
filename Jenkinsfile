@@ -104,17 +104,6 @@ EOF
                 """
             }
         }
-        stage('Deploy Nginx Config') {
-            steps {
-                script {
-                    // sudo 제거
-                    sh 'cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup.$(date +%Y%m%d_%H%M%S)'
-                    sh 'cp nginx/nginx.conf /etc/nginx/sites-available/default'
-                    sh 'nginx -t'
-                    sh 'systemctl reload nginx'
-                }
-            }
-        }
     }
     post {
         success {
