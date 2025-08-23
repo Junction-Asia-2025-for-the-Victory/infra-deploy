@@ -62,7 +62,9 @@ pipeline {
                     string(credentialsId: 'MYSQL_USER', variable: 'MYSQL_USER'),
                     string(credentialsId: 'MYSQL_PASSWORD', variable: 'MYSQL_PASSWORD'),
                     string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'MYSQL_ROOT_PASSWORD'),
-                    string(credentialsId: 'AES_SECRET_KEY', variable: 'AES_SECRET_KEY')
+                    string(credentialsId: 'AES_SECRET_KEY', variable: 'AES_SECRET_KEY'),
+                    string(credentialsId: 'ENV', variable: 'ENV'),
+                    string(credentialsId: 'GEMINI_API_KEY', variable: 'GEMINI_API_KEY')
                 ]) {
                     sh """
                         echo "=== Creating .env file ==="
@@ -82,6 +84,8 @@ MYSQL_USER=\${MYSQL_USER}
 MYSQL_PASSWORD=\${MYSQL_PASSWORD}
 MYSQL_ROOT_PASSWORD=\${MYSQL_ROOT_PASSWORD}
 AES_SECRET_KEY=\${AES_SECRET_KEY}
+ENV=\${ENV}
+GEMINI_API_KEY=\${GEMINI_API_KEY}
 EOF
                         
                         echo "=== Verifying .env file ==="

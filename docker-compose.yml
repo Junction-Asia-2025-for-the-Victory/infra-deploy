@@ -32,6 +32,15 @@ services:
       timeout: 5s
       retries: 5
 
+  ai-server:
+    image: ${AI_IMAGE}
+    environment:
+      - ENV=${ENV}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    ports:
+      - "8000:8000"
+    restart: always
+
   backend:
     image: ${BACKEND_IMAGE}            # ghcr.io/<org>/backend:latest 등
     environment:
