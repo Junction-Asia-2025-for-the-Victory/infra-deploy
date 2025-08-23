@@ -55,6 +55,7 @@ services:
       FRONTEND_URL: ${FRONTEND_URL}
       AES_SECRET_KEY: ${AES_SECRET_KEY}
       FASTAPI_URL: ${FASTAPI_URL}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
     depends_on:
       mysql:
         condition: service_healthy
