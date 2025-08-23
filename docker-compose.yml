@@ -67,6 +67,7 @@ services:
     image: ${FRONTEND_IMAGE}           # ghcr.io/<org>/frontend:latest 등
     environment:
       NODE_ENV: production
+      VITE_API_URL: ${VITE_API_URL}
     ports:
       - "5173:5173"
     restart: always

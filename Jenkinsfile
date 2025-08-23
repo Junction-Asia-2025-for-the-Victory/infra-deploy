@@ -78,7 +78,8 @@ pipeline {
                     string(credentialsId: 'ENV', variable: 'ENV'),
                     string(credentialsId: 'GEMINI_API_KEY', variable: 'GEMINI_API_KEY'),
                     string(credentialsId: 'FASTAPI_URL', variable: 'FASTAPI_URL'),
-                    string(credentialsId: 'OPENAI_API_KEY', variable: 'OPENAI_API_KEY')
+                    string(credentialsId: 'OPENAI_API_KEY', variable: 'OPENAI_API_KEY'),
+                    string(credentialsId: 'VITE_API_URL', variable: 'VITE_API_URL')
                 ]) {
                     sh """
                         echo "=== Creating .env file ==="
@@ -103,6 +104,7 @@ ENV=\${ENV}
 GEMINI_API_KEY=\${GEMINI_API_KEY}
 FASTAPI_URL=\${FASTAPI_URL}
 OPENAI_API_KEY=\${OPENAI_API_KEY}
+VITE_API_URL=\${VITE_API_URL}
 EOF
                         
                         echo "=== Verifying .env file ==="
