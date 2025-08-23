@@ -27,6 +27,7 @@ pipeline {
                     echo "=== Checking if local images exist ==="
                     echo "Backend image: ${BACKEND_IMAGE}"
                     echo "Frontend image: ${FRONTEND_IMAGE}"
+                    echo "AI image: ${AI_IMAGE}"
                     
                     # 이미지 존재 확인
                     if docker images ${BACKEND_IMAGE} --format "table {{.Repository}}:{{.Tag}}" | grep -v REPOSITORY | grep -q .; then
@@ -44,6 +45,15 @@ pipeline {
                         echo "❌ Frontend image not found: ${FRONTEND_IMAGE}"
                         echo "Available victory-frontend images:"
                         docker images victory-frontend || echo "No victory-frontend images found"
+                        exit 1
+                    fi
+                    
+                    if docker images ${AI_IMAGE} --format "table {{.Repository}}:{{.Tag}}" | grep -v REPOSITORY | grep -q .; then
+                        echo "✅ AI image found: ${AI_IMAGE}"
+                    else
+                        echo "❌ AI image not found: ${AI_IMAGE}"
+                        echo "Available victory-ai images:"
+                        docker images victory-ai || echo "No victory-ai images found"
                         exit 1
                     fi
                 """
@@ -106,6 +116,7 @@ EOF
                     echo "=== Starting deployment with local images ==="
                     echo "Backend image: ${BACKEND_IMAGE}"
                     echo "Frontend image: ${FRONTEND_IMAGE}"
+                    echo "ai image: ${AI_IMAGE}"
                     
                     # 로컬 이미지이므로 pull 생략
                     ${DC} up -d
