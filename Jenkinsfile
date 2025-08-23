@@ -6,12 +6,14 @@ pipeline {
     parameters {
         string(name: 'BACKEND_TAG', defaultValue: 'latest')
         string(name: 'FRONTEND_TAG', defaultValue: 'latest')
+        string(name: 'AI_TAG', defaultValue: 'latest') 
     }
     environment {
         DC = 'docker compose'
         // 로컬 이미지 이름 사용
         BACKEND_IMAGE = "victory-backend:${params.BACKEND_TAG}"
         FRONTEND_IMAGE = "victory-frontend:${params.FRONTEND_TAG}"
+        AI_IMAGE = "victory-ai:${params.AI_TAG}"
     }
     stages {
         stage('Checkout'){
@@ -71,6 +73,7 @@ pipeline {
                         cat > .env <<EOF
 BACKEND_IMAGE=${BACKEND_IMAGE}
 FRONTEND_IMAGE=${FRONTEND_IMAGE}
+AI_IMAGE=${AI_IMAGE}
 GOOGLE_CLIENT_ID=\${GOOGLE_CLIENT_ID}
 GOOGLE_CLIENT_SECRET=\${GOOGLE_CLIENT_SECRET}
 GOOGLE_REDIRECT_URL=\${GOOGLE_REDIRECT_URL}
